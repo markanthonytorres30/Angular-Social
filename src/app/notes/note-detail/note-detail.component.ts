@@ -28,4 +28,8 @@ export class NoteDetailComponent {
     this.noteService.deleteNote(id);
   }
 
+  updateNote(id: string) {
+    this.noteService.deleteNote(id);
+  }
+
 }
