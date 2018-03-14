@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AuthService } from '../../core/auth.service';
+
+
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
@@ -11,9 +17,12 @@ type FormErrors = { [u in UserFields]: string };
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss'],
 })
+
+
 export class UserFormComponent implements OnInit {
 
   userForm: FormGroup;
+
   newUser = true; // to toggle login or signup form
   passReset = false; // set to true when password reset is triggered
   formErrors: FormErrors = {
@@ -21,6 +30,7 @@ export class UserFormComponent implements OnInit {
     'password': '',
   };
   validationMessages = {
+    
     'email': {
       'required': 'Email is required.',
       'email': 'Email must be a valid email',
@@ -58,6 +68,7 @@ export class UserFormComponent implements OnInit {
 
   buildForm() {
     this.userForm = this.fb.group({
+      
       'email': ['', [
         Validators.required,
         Validators.email,
